@@ -33,9 +33,9 @@ $router->get('^/rss$', function() {
 	}
 	
 	usort($posts, function($a, $b) {
-    if ($a == $b) return 0;
-    return ($a > $b) ? -1 : 1;
-  });
+		if ($a == $b) return 0;
+		return ($a > $b) ? -1 : 1;
+	});
 	
 	$template->data['posts'] = $posts;
 	$template->render();
