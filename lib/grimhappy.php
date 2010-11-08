@@ -1,5 +1,7 @@
 <?php
 
+namespace GrimHappy;
+
 include 'config.php';
 include 'post.php';
 include 'page.php';
@@ -19,4 +21,4 @@ function shutdown() {
 	$router->execute();
 }
 
-register_shutdown_function('shutdown');
+register_shutdown_function('GrimHappy\shutdown');

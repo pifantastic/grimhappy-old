@@ -1,5 +1,7 @@
 <?php
 
+namespace GrimHappy;
+
 class Template {
 	
 	public $data = array();

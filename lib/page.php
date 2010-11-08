@@ -1,5 +1,7 @@
 <?php
 
+namespace GrimHappy;
+
 class Page {
 
 	public $filepath;

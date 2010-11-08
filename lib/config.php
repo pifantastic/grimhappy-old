@@ -1,5 +1,7 @@
 <?php
 
+namespace GrimHappy;
+
 class Config {
 	
 	// Self explanatory.

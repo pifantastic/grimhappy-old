@@ -1,5 +1,7 @@
 <?php
 
+namespace GrimHappy;
+
 class Post {
 
 	public $filepath;
