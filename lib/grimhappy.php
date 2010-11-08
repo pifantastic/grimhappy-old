@@ -1,7 +1,5 @@
 <?php
 
-date_default_timezone_set('America/Chicago');
-
 include 'config.php';
 include 'post.php';
 include 'page.php';
@@ -13,6 +11,8 @@ include 'markdown.php';
 // Globals.
 $router = new Router();
 $config = new Config();
+
+date_default_timezone_set($config->time_zone);
 
 function shutdown() {
 	global $router;

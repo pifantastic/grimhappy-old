@@ -23,6 +23,9 @@ class Config {
 	// Disqus shortname.  Set to FALSE to disable disqus.
 	public $disqus_shortname = 'grimhappy';
 	
+	// Time Zone.
+	public $time_zone = 'America/Chicago';
+	
 	// You can do some config initialization here.
 	public function __construct() {
 		foreach (glob(BASE_DIR . "/pages/*.md") as $file) {
