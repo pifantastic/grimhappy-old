@@ -1,0 +1,12 @@
+Action php5-script /gs-bin/php5-latest
+AddHandler php5-script .php
+ErrorDocument 404 lib/404.php
+
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !=/favicon.ico
+  RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
+</IfModule>

@@ -26,4 +26,18 @@ class Post {
 			$this->exists = TRUE;
 		}
 	}
+	
+	public static function all() {
+		$posts = array();
+		foreach (glob(BASE_DIR . "/posts/*.md") as $file) {
+			$posts[] = new Post($file);
+		}
+		
+		usort($posts, function($a, $b) {
+			if ($a == $b) return 0;
+			return ($a > $b) ? -1 : 1;
+		});
+		
+		return $posts;
+	}
 }
