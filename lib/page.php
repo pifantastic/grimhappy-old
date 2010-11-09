@@ -12,11 +12,11 @@ class Page {
 	public $exists = FALSE;
 	
 	public function __construct($filepath) {
-		$this->filepath = $filepath;
+		$this->filepath = BASE_DIR . "/pages/$filepath";
 		$this->title = str_replace('.md', '', basename($filepath));
 		$this->url = '/' . $this->title;
-		if (file_exists($filepath)) {
-			$this->content = file_get_contents($filepath);
+		if (file_exists($this->filepath)) {
+			$this->content = file_get_contents($this->filepath);
 			$this->html = Markdown($this->content);
 			$this->exists = TRUE;
 		}

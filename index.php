@@ -21,31 +21,21 @@ get('^/rss$', function() {
  * Blog posts!
  */
 get('^/(\d+)/(\d+)/(\d+)/(.*)$', function($y, $m, $d, $post) {
-	$post = new Post(BASE_DIR . "/posts/$y-$m-$d-$post.md");
-	if ($post->exists) {
-		$template = new Template("index.php");
-		$template->data['disqus'] = TRUE;
-		$template->data['posts'] = array($post);
-		$template->render();
-	}
-	else {
-		return FALSE;
-	}
+	$post = new Post("$y-$m-$d-$post.md");
+	$template = new Template("index.php");
+	$template->data['disqus'] = TRUE;
+	$template->data['posts'] = array($post);
+	$template->render();
 });
 
 /**
  * Pages!
  */
 get('^/(\w+)$', function($page) {
-	$page = new Page(BASE_DIR . "/pages/$page.md");
-	if ($page->exists) {
-		$template = new Template('index.php');
-		$template->data['page'] = $page;
-		$template->render();
-	}
-	else {
-		return FALSE;
-	}
+	$page = new Page("$page.md");
+	$template = new Template('index.php');
+	$template->data['page'] = $page;
+	$template->render();
 });
 
 /**

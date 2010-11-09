@@ -26,7 +26,11 @@ function get($url, $function) {
 // Route the request.
 function shutdown() {
 	global $router;
-	$router->execute();
+	try {
+  	$router->execute();
+  } catch (Exception $e) {
+    Response::error404();
+  }
 }
 
 register_shutdown_function('GrimHappy\shutdown');
