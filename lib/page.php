@@ -21,4 +21,12 @@ class Page {
 			$this->exists = TRUE;
 		}
 	}
+	
+	public static function all() {
+		$pages = array();
+		foreach (glob(BASE_DIR . "/pages/*.md") as $file) {
+			$pages[] = new Page($file);
+		}
+		return $pages;
+	}
 }

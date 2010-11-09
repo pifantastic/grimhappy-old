@@ -30,8 +30,6 @@ class Config {
 	
 	// You can do some config initialization here.
 	public function __construct() {
-		foreach (glob(BASE_DIR . "/pages/*.md") as $file) {
-			$this->pages[] = new Page($file);
-		}
+		$this->pages = Page::all();
 	}
 }

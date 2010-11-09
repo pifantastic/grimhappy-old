@@ -14,8 +14,16 @@ include 'markdown.php';
 $router = new Router();
 $config = new Config();
 
+// Shut the fuck up, PHP.
 date_default_timezone_set($config->time_zone);
 
+// Define a URL -> Callback.
+function get($url, $function) {
+  global $router;
+  $router->get($url, $function);
+}
+
+// Route the request.
 function shutdown() {
 	global $router;
 	$router->execute();
