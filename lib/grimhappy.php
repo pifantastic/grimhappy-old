@@ -25,9 +25,9 @@ function get($url, $function) {
 
 // Route the request.
 function shutdown() {
-	global $router;
-	try {
-  	$router->execute();
+  global $router;
+  try {
+    $router->execute();
   } catch (Exception $e) {
     Response::error404();
   }

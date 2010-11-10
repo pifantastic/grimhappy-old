@@ -9,40 +9,52 @@ define('BASE_DIR', __DIR__);
 include 'lib/grimhappy.php';
 
 /**
- * RSS!
- */
+* RSS!
+*/
 get('^/rss$', function() {
-	$template = new Template('rss.php');
-	$template->data['posts'] = Post::all();
-	$template->render();
+  $template = new Template('rss.php');
+  $template->data['posts'] = Post::all();
+  $template->render();
 });
 
 /**
- * Blog posts!
- */
+* Blog posts!
+*/
 get('^/(\d+)/(\d+)/(\d+)/(.*)$', function($y, $m, $d, $post) {
-	$post = new Post("$y-$m-$d-$post.md");
-	$template = new Template("index.php");
-	$template->data['disqus'] = TRUE;
-	$template->data['posts'] = array($post);
-	$template->render();
+  $post = new Post("$y-$m-$d-$post.md");
+  
+  if ($post->exists) {
+    $template = new Template("index.php");
+    $template->data['disqus'] = TRUE;
+    $template->data['posts'] = array($post);
+    $template->render();
+  }
+  else {
+    return FALSE;
+  }
 });
 
 /**
- * Pages!
- */
+* Pages!
+*/
 get('^/(\w+)$', function($page) {
-	$page = new Page("$page.md");
-	$template = new Template('index.php');
-	$template->data['page'] = $page;
-	$template->render();
+  $page = new Page("$page.md");
+  
+  if ($page->exists) {
+    $template = new Template('index.php');
+    $template->data['page'] = $page;
+    $template->render();
+  }
+  else {
+    return FALSE;
+  }
 });
 
 /**
- * Index!
- */
+* Index!
+*/
 get('^/$', function() {
-	$template = new Template('index.php');
-	$template->data['posts'] = Post::all();
-	$template->render();
+  $template = new Template('index.php');
+  $template->data['posts'] = Post::all();
+  $template->render();
 });
