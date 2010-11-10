@@ -64,6 +64,11 @@ header h1 {
     text-decoration: none;
     color: #222;
   }
+  
+  header .rss {
+    display: block;
+    float: right;
+  }
 
 /* Navigation */
 nav {

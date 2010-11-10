@@ -11,12 +11,15 @@
 </head>
 <body>
   <a href="https://github.com/pifantastic/grimhappy/">
-    <img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" />
+    <img style="position: fixed; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" />
   </a> 
   
   <div id="container">
     <header>
-      <h1><a href="/"><?php echo $config->blog_title ?></a></h1>
+      <h1>
+        <a href="/"><?php echo $config->blog_title ?></a>      
+        <a class="rss" href="/rss"><img src="//<?php echo $config->domain ?>/themes/<?php echo $config->theme ?>/img/feed-icon-14x14.png" /></a>
+      </h1>
     </header>
     
     <nav>
