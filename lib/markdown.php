@@ -23,7 +23,7 @@ define( 'MARKDOWN_VERSION',  "1.0.1n" ); # Sat 10 Oct 2009
 @define( 'MARKDOWN_EMPTY_ELEMENT_SUFFIX',  " />");
 
 # Define the width of a tab for code blocks.
-@define( 'MARKDOWN_TAB_WIDTH',     4 );
+@define( 'MARKDOWN_TAB_WIDTH',     2 );
 
 
 #

@@ -4,23 +4,23 @@ namespace GrimHappy;
 
 class Router {
   
-  public $routes;
-  public $url;
+  public static $routes;
+  public static $url;
   
-  public function __construct() {
-    $this->url = '/' . $_GET['url'];
+  public static function init() {
+    self::$url = '/' . $_GET['url'];
   }
   
-  public function get($url, $function) {
-    $this->routes[$url] = $function;
+  public static function get($url, $function) {
+    self::$routes[$url] = $function;
   }
   
-  public function execute() {
+  public static function execute() {
     $matches = array();
     $response = FALSE;
     
-    foreach ($this->routes as $route => $function) {
-      if (preg_match("%$route%", $this->url, $matches)) {
+    foreach (self::$routes as $route => $function) {
+      if (preg_match("%$route%", self::$url, $matches)) {
         $response = call_user_func_array($function, array_slice($matches, 1));
         break;
       }

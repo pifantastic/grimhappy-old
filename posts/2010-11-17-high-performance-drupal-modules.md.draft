@@ -1,0 +1,87 @@
+I've spent a lot of my time recently writing high performance Drupal modules.  It's very easy to write perfectly good, functional modules with far-reaching, negative affects on overall system performance.  I figured I would highlight some of the tips, tricks and patterns that I've adopted to ensure that any module I write has like, totally sweet performance.
+
+## Pressflow
+
+I should start by saying that at [Four Kitchens](http://fourkitchens) we build most (if not all) of our projects on [Pressflow](http://fourkitchens.com/pressflow-makes-drupal-scale).  Pressflow is a performance tuned, API compatible fork of Drupal.  It's a dead easy drop-in replacement for Drupal core that helps make Drupal scale.  Installing is crazy easy, you install it the exact same way you install Drupal.  And upgrading is just as easy. You can most likely upgrade to Pressflow the same way you upgrade to a newer version of Drupal.  
+
+With Pressflow you get a handful of important upgrades.
+
+### 1. Lazy Session Creation
+
+By default, Drupal creates a session for ALL users.  This makes it difficult to affectively use a reverse proxy cache like [Varnish](http://www.varnish-cache.org/).  Pressflow fixes this with lazy session creation.  Sessions are not created until absolutely necessary.  This usually means the user has logged in, a module has set a cookie, or a module has stored some data in `$_SESSION`.
+
+### 2. Database Replication
+
+### 3. MySQL Optimizations
+
+### 4. PHP Optimizations
+
+## So I'm Using Pressflow, What Now?
+
+It all comes down to 3 main things:
+
+* Queries
+* Caching
+* Deferred Execution
+
+## Queries
+
+Overwhelmingly, if your module is suffering from poor performance, it has something to do with an expensive SQL query.
+
+## Caching
+
+### Menu Callback Cache
+
+A simple way to implement effective caching is to install and use the [Menu Callback Cache](http://drupal.org/project/menu_callback_cache) module.  This module augments the Drupal menu system by adding the ability to cache specific menu items.
+
+		:::php
+		
+		/** 
+		 * Implementation of hook_menu().
+		 */
+		function my_module_menu() {
+			$items = array();
+			
+			$items['foo/bar/%node'] = array(
+				// Standard Drupal configuration
+				'title' => 'Fooing Bars', 
+				'description' => 'This is a guide to the art of fooing bars.', 
+				'page callback' => 'my_module_foo_bar', 
+				'page arguments' => array(2),
+				'access arguments' => array('access content'), 
+				'type' => MENU_CALLBACK,
+				
+				// New hotness
+				'cache' => MENU_CALLBACK_CACHE_GLOBAL,
+				// Optional, defaults to 5 minutes.
+				'cache max age' => 60 * 60 * 2,
+				// Optional, one will be generated if not specified.
+				'cache key callback' => 'my_module_foo_bar_cache',
+			);
+			
+			return $items;
+		}
+		
+		/**
+		 * Menu callback for foo/bar.
+		 */
+		function my_module_foo_bar() {
+			// Do complicated querying and theming up in here.
+		}
+		
+		/**
+		 * Cache key callback for foo/bar.
+		 */
+		function my_module_foo_bar_cache($node) {
+			// Set the cache key if this node is of type 'page'.
+			if ($node->type == 'page') {
+				return __FUNCTION__ . '-' . $node->nid
+			}
+			// Don't cache nodes that aren't type 'page'.
+			else {
+				throw new DoNotCacheException();
+			}
+		}
+		
+
+## Deferred Execution

@@ -6,3 +6,5 @@ One day I used one of those sites meant to generate a "sweet new web startup com
 really liked it.
 
 This is mostly a place for me to ramble about code, music and food.
+
+![I'm always so awkward](/files/djQuery.jpg)

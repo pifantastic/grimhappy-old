@@ -7,6 +7,8 @@ body {
   background-color: #222;
 }
 
+header, nav, article, footer { display: block; }
+
 /* Obligatory */
 .clearfix:before, .clearfix:after { content: "\0020"; display: block; height: 0; visibility: hidden; } 
 .clearfix:after { clear: both; }
@@ -41,17 +43,24 @@ h1 {
   font-size: 62px;
 }
 
-article h1, h2 {
-  font-size: 30px;
-}
+article h1 { font-size: 30px; }
+article h2 { font-size: 22px; }
+article h3 { font-size: 16px; }
 
-article p {
+article p, article li {
   font-size: 16px;
   line-height: 24px;
 }
 
 article a {
   color: #FF450C;
+}
+
+blockquote {
+  border-left: 5px solid #CCC;
+  padding: 3px  10px;
+  margin: 1em 0 1em 15px;
+  background-color: #EEE;
 }
 
 /* Header */
@@ -93,6 +102,21 @@ nav {
         font-size: 16px;
         color: #222;
       }
+
+nav.article {
+  height: 20px;
+  border: none;
+}
+
+  nav.article .prev {
+    display: block;
+    float: left;
+  }
+  
+  nav.article .next {
+    display: block;
+    float: right;  
+  }
 
 /* Footer */
 footer {

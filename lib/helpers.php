@@ -9,4 +9,10 @@ class Response {
     echo file_get_contents(BASE_DIR . '/lib/404.php');
     exit();
   }
+  
+  public static function redirect($location) {
+    header("Location: " . $location);
+    exit();
+  }
+
 }

@@ -5,31 +5,34 @@ namespace GrimHappy;
 class Config {
 	
 	// Self explanatory.
-	public $domain = 'grimhappy.com';
+	public static $domain = 'grimhappy.com';
 	
 	// Self explanatory.
-	public $blog_title = "grimhappy.com";
+	public static $blog_title = "grimhappy.com";
 	
 	// Self explanatory.
-	public $blog_description = 'A blog about code!';
+	public static $blog_description = 'A blog about code!';
 	
 	// Format for post dates.
-	public $date_format = "F jS, Y";
+	public static $date_format = "F jS, Y";
 	
 	// Active theme.
-	public $theme = "ThemeHappy";
+	public static $theme = "ThemeHappy";
+	
+	public static $theme_path = '';
 	
 	// All pages. 
-	public $pages = array();
+	public static $pages = array();
 	
 	// Disqus shortname.  Set to FALSE to disable disqus.
-	public $disqus_shortname = 'grimhappy';
+	public static $disqus_shortname = 'grimhappy';
 	
 	// Time Zone.
-	public $time_zone = 'America/Chicago';
+	public static $time_zone = 'America/Chicago';
 	
 	// You can do some config initialization here.
-	public function __construct() {
-		$this->pages = Page::all();
+	public static function init() {
+		self::$pages = Page::all();
+		self::$theme_path = DIRECTORY_SEPARATOR . 'themes' . DIRECTORY_SEPARATOR . self::$theme . DIRECTORY_SEPARATOR;
 	}
 }

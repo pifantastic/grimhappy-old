@@ -1,13 +1,18 @@
+<?php
+namespace GrimHappy;
+?>
 <!DOCTYPE html>
 <html>
 <head>
-  <title><?php echo $config->blog_title ?></title>
+  <title><?php echo Config::$blog_title ?></title>
   
-  <link href="//<?php echo $config->domain ?>/themes/<?php echo $config->theme ?>/syntaxhighlighter/styles/shCore.css" rel="stylesheet" type="text/css" />
-  <link href="//<?php echo $config->domain ?>/themes/<?php echo $config->theme ?>/syntaxhighlighter/styles/shCoreRDark.css" rel="stylesheet" type="text/css" />
-  <link href="//<?php echo $config->domain ?>/themes/<?php echo $config->theme ?>/syntaxhighlighter/styles/shThemeRDark.css" rel="stylesheet" type="text/css" />
-  <link href="//<?php echo $config->domain ?>/themes/<?php echo $config->theme ?>/css/jquery.tweet.css" rel="stylesheet" type="text/css" />
-  <link href="//<?php echo $config->domain ?>/themes/<?php echo $config->theme ?>/css/styles.css" rel="stylesheet" type="text/css" />
+  <link href="<?php echo Config::$theme_path ?>syntaxhighlighter/styles/shCore.css" rel="stylesheet" type="text/css" />
+  <link href="<?php echo Config::$theme_path ?>syntaxhighlighter/styles/shCoreRDark.css" rel="stylesheet" type="text/css" />
+  <link href="<?php echo Config::$theme_path ?>syntaxhighlighter/styles/shThemeRDark.css" rel="stylesheet" type="text/css" />
+  <link href="<?php echo Config::$theme_path ?>css/jquery.tweet.css" rel="stylesheet" type="text/css" />
+  <link href="<?php echo Config::$theme_path ?>css/styles.css" rel="stylesheet" type="text/css" />
+
+  <script src="<?php echo Config::$theme_path . 'js/modernizr-1.6.min.js' ?>"></script>
 </head>
 <body>
   <a href="https://github.com/pifantastic/grimhappy/">
@@ -17,15 +22,15 @@
   <div id="container">
     <header>
       <h1>
-        <a href="/"><?php echo $config->blog_title ?></a>      
-        <a class="rss" href="/rss"><img src="//<?php echo $config->domain ?>/themes/<?php echo $config->theme ?>/img/feed-icon-14x14.png" /></a>
+        <a href="/"><?php echo Config::$blog_title ?></a>      
+        <a class="rss" href="/rss"><img src="//<?php echo Config::$domain ?>/themes/<?php echo Config::$theme ?>/img/feed-icon-14x14.png" /></a>
       </h1>
     </header>
     
     <nav>
       <ul>
         <li><a href="/">home</a></li>
-        <?php foreach ($config->pages as $p): ?>
+        <?php foreach (Config::$pages as $p): ?>
           <li><a href="<?php echo $p->url ?>"><?php echo $p->title ?></a></li>
         <?php endforeach ?>
       </ul>
@@ -41,15 +46,23 @@
           <article>
             <h1><a href="<?php echo $post->url ?>"><?php echo $post->title ?></a></h1>
             <div class="meta">
-              <time><?php echo date($config->date_format, $post->timestamp) ?></time> |
+              <time><?php echo date(Config::$date_format, $post->timestamp) ?></time> |
               <a href="<?php echo $post->url ?>#disqus_thread">permalink</a>
             </div>
             <?php echo $post->html ?>
           </article>
         <?php endforeach ?>
+        <nav class="article">
+          <?php if  ($prev = $post->prev()): ?>
+            <a class="prev" href="<?php echo $prev->url ?>">&laquo; Older posts</a>
+          <?php endif ?>
+          <?php if  ($next = $post->next()): ?>
+            <a class="next" href="<?php echo $next->url ?>">Newer posts &raquo;</a>        
+          <?php endif ?>
+        </nav>
       <?php endif ?>
       
-      <?php if ($config->disqus_shortname && $disqus): ?>
+      <?php if (Config::$disqus_shortname && $disqus): ?>
         <div id="disqus_thread">
           <h3>Say something</h3>
         </div>
@@ -83,9 +96,9 @@
   </div>
   
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
-  <script src="//<?php echo $config->domain ?>/themes/<?php echo $config->theme ?>/js/jquery.tweet.js"></script>
+  <script src="//<?php echo Config::$domain ?>/themes/<?php echo Config::$theme ?>/js/jquery.tweet.js"></script>
 
-  <?php if ($config->disqus_shortname): ?>
+  <?php if (Config::$disqus_shortname): ?>
   <script type="text/javascript">
     var disqus_shortname = 'grimhappy';
     (function () {
@@ -96,13 +109,13 @@
   </script>
   <?php endif ?>
 
-  <script src="//<?php echo $config->domain ?>/themes/<?php echo $config->theme ?>/syntaxhighlighter/scripts/shCore.js"></script>
-  <script src="//<?php echo $config->domain ?>/themes/<?php echo $config->theme ?>/syntaxhighlighter/scripts/shAutoloader.js"></script>
+  <script src="//<?php echo Config::$domain ?>/themes/<?php echo Config::$theme ?>/syntaxhighlighter/scripts/shCore.js"></script>
+  <script src="//<?php echo Config::$domain ?>/themes/<?php echo Config::$theme ?>/syntaxhighlighter/scripts/shAutoloader.js"></script>
   <script>
     function path() {
       var args = arguments, result = [];
       for (var i = 0; i < args.length; i++)
-        result.push(args[i].replace('@', '/themes/<?php echo $config->theme ?>/syntaxhighlighter/scripts/'));
+        result.push(args[i].replace('@', '/themes/<?php echo Config::$theme ?>/syntaxhighlighter/scripts/'));
       return result
     };
 
@@ -157,6 +170,16 @@
         loading_text: "loading tweets..."
       });
     });
+  </script>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-19610299-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
   </script>
 </body>
 </html>

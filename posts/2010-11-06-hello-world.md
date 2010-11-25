@@ -4,7 +4,7 @@ The truth is, I was looking at the code for [Brian Leroux's](http://twitter.com/
 
 Creating a new post is as simple as creating a new file in the `posts` directory following the naming scheme: `YYYY-MM-DD-my-post-title.md`.  Everything uses [markdown](http://daringfireball.net/projects/markdown/) for formatting.  Pages are created similarly by adding a new file to the `pages` directory following the naming scheme `page-name.md`.  
 
-You can add your own behavior very easily too!  Just pop open `index.php` and a new url and callback:
+You can add your own behavior very easily too!  Just pop open `index.php` and add a new url and callback:
 
     :::php
     get('^whatsup$', function() {

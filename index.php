@@ -9,8 +9,8 @@ define('BASE_DIR', __DIR__);
 include 'lib/grimhappy.php';
 
 /**
-* RSS!
-*/
+ * RSS!
+ */
 get('^/rss$', function() {
   $template = new Template('rss.php');
   $template->data['posts'] = Post::all();
@@ -18,8 +18,8 @@ get('^/rss$', function() {
 });
 
 /**
-* Blog posts!
-*/
+ * Blog posts!
+ */
 get('^/(\d+)/(\d+)/(\d+)/(.*)$', function($y, $m, $d, $post) {
   $post = new Post("$y-$m-$d-$post.md");
   
@@ -30,13 +30,22 @@ get('^/(\d+)/(\d+)/(\d+)/(.*)$', function($y, $m, $d, $post) {
     $template->render();
   }
   else {
-    return FALSE;
+    false;
   }
 });
 
 /**
-* Pages!
-*/
+ * Drafts!
+ */
+get('^/drafts$', function() {
+  $template = new Template('index.php');
+  $template->data['posts'] = Post::drafts();
+  $template->render();
+});
+
+/**
+ * Pages!
+ */
 get('^/(\w+)$', function($page) {
   $page = new Page("$page.md");
   
@@ -51,8 +60,8 @@ get('^/(\w+)$', function($page) {
 });
 
 /**
-* Index!
-*/
+ * Index!
+ */
 get('^/$', function() {
   $template = new Template('index.php');
   $template->data['posts'] = Post::all();

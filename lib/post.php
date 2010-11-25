@@ -29,9 +29,52 @@ class Post {
     }
   }
   
+  public function next() {
+    $posts = self::all();
+    
+    foreach ($posts as $i => $post) {
+      if ($post->url == $this->url) {
+        if (isset($posts[$i - 1])) {
+          return $posts[$i - 1];
+        }
+      }
+    }
+  }
+  
+  public function prev() {
+    $posts = self::all();
+    
+    foreach ($posts as $i => $post) {
+      if ($post->url == $this->url) {
+        if (isset($posts[$i + 1])) {
+          return $posts[$i + 1];
+        }
+      }
+    }
+  }
+  
   public static function all() {
+    static $posts = NULL;
+    
+    if (is_null($posts)) {
+      $posts = array();
+      
+      foreach (glob(BASE_DIR . "/posts/*.md") as $file) {
+        $posts[] = new Post(basename($file));
+      }
+      
+      usort($posts, function($a, $b) {
+        if ($a == $b) return 0;
+        return ($a > $b) ? -1 : 1;
+      });
+    }
+    
+    return $posts;
+  }
+	
+  public static function drafts() {
     $posts = array();
-    foreach (glob(BASE_DIR . "/posts/*.md") as $file) {
+    foreach (glob(BASE_DIR . "/posts/*.md.draft") as $file) {
       $posts[] = new Post(basename($file));
     }
     
