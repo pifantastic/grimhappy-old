@@ -10,7 +10,7 @@ namespace GrimHappy;
 		<?php foreach ($posts as $post): ?>
 			<item>
 				<title><?php echo $post->title ?></title>
-				<description><?php echo $post->html ?></description>
+				<description><?php echo htmlspecialchars($post->html) ?></description>
 				<link>http://<?php echo Config::$domain . $post->url ?></link>
 				<guid>http://<?php echo Config::$domain . $post->url ?></guid>
 				<pubDate><?php echo $post->timestamp ?></pubDate>

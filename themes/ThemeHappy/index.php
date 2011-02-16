@@ -79,15 +79,16 @@ namespace GrimHappy;
     </div>
 
     <div id="sidebar">
-      <h2>Links</h2>
+      <h2>Linking</h2>
       <ul>
         <li><a href="http://twitter.com/AaronForsander">Twitter</a></li>
         <li><a href="http://facebook.com/forsander">Facebook</a></li>
         <li><a href="http://www.linkedin.com/in/aaronforsander">Linked In</a></li>
       </ul>
-      <div id="twitter" class="tweet">
-        <h3>omg tweets!</h3>
-      </div>
+      <h2>Speaking</h2>
+      <a href="http://www.swdrupalsummit.com/"><img src="/files/swds.png" /></a>
+      <h2>Tweeting</h2>
+      <div id="twitter" class="tweet"></div>
     </div>
     
     <footer>

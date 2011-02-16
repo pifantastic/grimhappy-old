@@ -12,6 +12,7 @@ include 'lib/grimhappy.php';
  * RSS!
  */
 get('^/rss$', function() {
+	header("Content-Type: application/xml; charset=ISO-8859-1"); 
   $template = new Template('rss.php');
   $template->data['posts'] = Post::all();
   $template->render();
@@ -30,7 +31,7 @@ get('^/(\d+)/(\d+)/(\d+)/(.*)$', function($y, $m, $d, $post) {
     $template->render();
   }
   else {
-    false;
+    return FALSE;
   }
 });
 
