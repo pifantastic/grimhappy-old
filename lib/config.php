@@ -10,6 +10,8 @@ class Config {
 	// Self explanatory.
 	public static $blog_title = "grimhappy.com";
 	
+	public static $doc_title = "Aaron Forsander | Bite off more than you can chew.  AND THEN CHEW IT.";
+
 	// Self explanatory.
 	public static $blog_description = 'A blog about code!';
 	

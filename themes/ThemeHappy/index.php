@@ -4,7 +4,7 @@ namespace GrimHappy;
 <!DOCTYPE html>
 <html>
 <head>
-  <title><?php echo Config::$blog_title ?></title>
+  <title><?php echo Config::$doc_title ?></title>
   
   <link href="<?php echo Config::$theme_path ?>syntaxhighlighter/styles/shCore.css" rel="stylesheet" type="text/css" />
   <link href="<?php echo Config::$theme_path ?>syntaxhighlighter/styles/shCoreRDark.css" rel="stylesheet" type="text/css" />
